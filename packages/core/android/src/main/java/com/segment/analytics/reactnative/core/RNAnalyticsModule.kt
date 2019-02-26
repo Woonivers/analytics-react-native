@@ -69,9 +69,13 @@ class RNAnalyticsModule(context: ReactApplicationContext): ReactContextBaseJavaM
             builder.logLevel(Analytics.LogLevel.VERBOSE)
         }
 
-        Analytics.setSingletonInstance(
-            RNAnalytics.buildWithIntegrations(builder)
-        )
+        try{
+            Analytics.setSingletonInstance(
+                RNAnalytics.buildWithIntegrations(builder)
+            )
+        }catch(e: Exception){
+            // Error, reloading in development or in production with codepush.
+        }
     }
 
     @ReactMethod
